@@ -1,11 +1,20 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { getCurrentUser } from '../lib/appwrite';
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native';
+
+import { useColorScheme } from '@/hooks/useColorScheme';
 
 const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
 const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
+  const colorScheme = useColorScheme();
+
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,7 +48,9 @@ const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         loading,
       }}
     >
-      {children}
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        {children}
+      </ThemeProvider>
     </GlobalContext.Provider>
   );
 };
