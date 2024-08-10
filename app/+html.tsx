@@ -29,11 +29,15 @@ export default function Root({ children }: PropsWithChildren) {
 }
 
 const responsiveBackground = `
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  background-color: #fff;
+  background-color: #000; /* Set background color to black */
 }
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #000;
+    background-color: #161622 ;
   }
 }`;
